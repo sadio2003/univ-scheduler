@@ -1,0 +1,39 @@
+# Fichiers compilés
+*.class
+target/
+dependency-reduced-pom.xml
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# VS Code
+.vscode/
+
+# NetBeans
+nb-configuration.xml
+
+# Fichiers de base de données
+*.db
+*.sqlite
+*.log
+
+# Fichiers de configuration sensibles
+application.properties
+config.properties
+
+# Dossiers de build
+/build/
+/dist/
+
+# Fichiers système
+.DS_Store
+Thumbs.db

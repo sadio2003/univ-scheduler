@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.scheduler.controller.LoginController">
+    <center>
+        <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="450.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="450.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="600.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+
+            <!-- Partie gauche - Image/Logo -->
+            <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #3498db, #2c3e50);">
+                <children>
+                    <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../images/logo_uidt.png" />
+                        </image>
+                    </ImageView>
+                    <Label text="UNIV-SCHEDULER" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="36.0" />
+                        </font>
+                    </Label>
+                    <Label text="Gestion intelligente des salles et emplois du temps" textFill="WHITE" wrapText="true">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Label>
+                    <Label text="Université du Sénégal" textFill="WHITE">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                </children>
+            </VBox>
+
+            <!-- Partie droite - Formulaire de connexion -->
+            <VBox alignment="CENTER" spacing="20.0" GridPane.columnIndex="1">
+                <children>
+                    <Label text="Connexion" textFill="#2c3e50">
+                        <font>
+                            <Font name="System Bold" size="28.0" />
+                        </font>
+                    </Label>
+
+                    <Label text="Veuillez vous connecter pour accéder à l'application" textFill="#7f8c8d">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+
+                    <VBox spacing="15.0" VBox.vgrow="NEVER">
+                        <children>
+                            <Label text="Email" textFill="#2c3e50">
+                                <font>
+                                    <Font name="System Bold" size="14.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="emailField" promptText="exemple@uidt.sn" style="-fx-background-radius: 5;">
+                                <VBox.margin>
+                                    <Insets />
+                                </VBox.margin>
+                            </TextField>
+
+                            <Label text="Mot de passe" textFill="#2c3e50">
+                                <font>
+                                    <Font name="System Bold" size="14.0" />
+                                </font>
+                            </Label>
+                            <PasswordField fx:id="passwordField" promptText="••••••••" style="-fx-background-radius: 5;" />
+
+                            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                <children>
+                                    <CheckBox fx:id="rememberMeCheckBox" text="Se souvenir de moi" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Hyperlink onAction="#handleForgotPassword" text="Mot de passe oublié?" textFill="#3498db" />
+                                </children>
+                            </HBox>
+
+                            <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #3498db; -fx-background-radius: 5;" text="SE CONNECTER" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="14.0" />
+                                </font>
+                            </Button>
+
+                            <ProgressIndicator fx:id="loadingIndicator" maxHeight="30.0" maxWidth="30.0" visible="false" />
+
+                            <Label fx:id="statusLabel" style="-fx-text-fill: #d32f2f;" visible="false" wrapText="true" />
+                        </children>
+                    </VBox>
+
+                    <Separator prefWidth="200.0" />
+
+                    <HBox alignment="CENTER" spacing="10.0">
+                        <children>
+                            <Button mnemonicParsing="false" style="-fx-background-color: #3b5998;" text="f" textFill="WHITE" />
+                            <Button mnemonicParsing="false" style="-fx-background-color: #dd4b39;" text="G+" textFill="WHITE" />
+                            <Button mnemonicParsing="false" style="-fx-background-color: #0077b5;" text="in" textFill="WHITE" />
+                        </children>
+                    </HBox>
+
+                    <Label text="© 2026 Université du Sénégal - Tous droits réservés" textFill="#95a5a6">
+                        <font>
+                            <Font size="11.0" />
+                        </font>
+                    </Label>
+                </children>
+                <padding>
+                    <Insets left="50.0" right="50.0" />
+                </padding>
+            </VBox>
+        </GridPane>
+    </center>
+</BorderPane>

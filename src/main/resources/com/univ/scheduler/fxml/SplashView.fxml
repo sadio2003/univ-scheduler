@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #3498db, #2c3e50); -fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/logo_uidt.png" />
+            </image>
+        </ImageView>
+
+        <Label text="UNIV-SCHEDULER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+
+        <Label text="Université du Sénégal" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+
+        <Label text="Chargement en cours..." textFill="WHITE">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+
+        <ProgressBar prefWidth="200.0" progress="-1.0" style="-fx-accent: white;" />
+
+        <Label text="© 2026 - Tous droits réservés" textFill="#ecf0f1">
+            <font>
+                <Font size="10.0" />
+            </font>
+        </Label>
+    </children>
+</VBox>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.scheduler.controller.EmploiDuTempsController">
+
+    <top>
+        <VBox spacing="10.0" style="-fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2);" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label text="Emploi du temps" textFill="#2c3e50">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <!-- Navigation -->
+                        <Button fx:id="btnPrecedent" mnemonicParsing="false" style="-fx-background-color: #3498db;" text="◀" textFill="WHITE" />
+                        <DatePicker fx:id="datePicker" prefWidth="150.0" />
+                        <Button fx:id="btnSuivant" mnemonicParsing="false" style="-fx-background-color: #3498db;" text="▶" textFill="WHITE" />
+                        <Button fx:id="btnAujourdhui" mnemonicParsing="false" style="-fx-background-color: #2ecc71;" text="Aujourd'hui" textFill="WHITE" />
+
+                        <ComboBox fx:id="vueCombo" prefWidth="100.0" />
+                        <ComboBox fx:id="semaineCombo" prefWidth="120.0" />
+
+                        <Button fx:id="btnAjouterSeance" mnemonicParsing="false" style="-fx-background-color: #27ae60;" text="➕ Nouvelle séance" textFill="WHITE" />
+                        <Button fx:id="btnExporter" mnemonicParsing="false" style="-fx-background-color: #e67e22;" text="📥 Exporter" textFill="WHITE" />
+                        <Button fx:id="btnImprimer" mnemonicParsing="false" style="-fx-background-color: #95a5a6;" text="🖨️ Imprimer" textFill="WHITE" />
+                    </children>
+                </HBox>
+
+                <Separator prefWidth="200.0" />
+
+                <!-- Filtres et informations -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <children>
+                        <Label fx:id="periodeLabel" text="Période du 01/01/2024 au 07/01/2024" textFill="#2c3e50">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.8" BorderPane.alignment="CENTER">
+            <items>
+                <!-- Emploi du temps -->
+                <VBox spacing="10.0">
+                    <children>
+                        <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS">
+                            <tabs>
+                                <Tab fx:id="tabVueGlobale" text="Vue globale" closable="false">
+                                    <content>
+                                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                                            <content>
+                                                <GridPane fx:id="emploiDuTempsGrid" gridLinesVisible="true" style="-fx-background-color: white;" />
+                                            </content>
+                                        </ScrollPane>
+                                    </content>
+                                </Tab>
+                                <Tab fx:id="tabParClasse" text="Par classe" closable="false">
+                                    <content>
+                                        <VBox spacing="10.0" style="-fx-padding: 10;">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                    <Label text="Sélectionner une classe :" />
+                                                    <ComboBox fx:id="classeCombo" prefWidth="150.0" />
+                                                </HBox>
+                                                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                                                    <content>
+                                                        <GridPane fx:id="emploiDuTempsGrid" gridLinesVisible="true" style="-fx-background-color: white;" />
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+                                <Tab fx:id="tabParSalle" text="Par salle" closable="false">
+                                    <content>
+                                        <VBox spacing="10.0" style="-fx-padding: 10;">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                    <Label text="Sélectionner une salle :" />
+                                                    <ComboBox fx:id="salleCombo" prefWidth="200.0" />
+                                                </HBox>
+                                                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                                                    <content>
+                                                        <GridPane fx:id="emploiDuTempsGrid" gridLinesVisible="true" style="-fx-background-color: white;" />
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+                                <Tab fx:id="tabParEnseignant" text="Par enseignant" closable="false">
+                                    <content>
+                                        <VBox spacing="10.0" style="-fx-padding: 10;">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                    <Label text="Sélectionner un enseignant :" />
+                                                    <ComboBox fx:id="enseignantCombo" prefWidth="200.0" />
+                                                </HBox>
+                                                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                                                    <content>
+                                                        <GridPane fx:id="emploiDuTempsGrid" gridLinesVisible="true" style="-fx-background-color: white;" />
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
+                </VBox>
+
+                <!-- Panneau des conflits -->
+                <VBox spacing="10.0" style="-fx-padding: 10;">
+                    <children>
+                        <Label text="🔄 Conflits détectés" textFill="#2c3e50">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <ListView fx:id="conflitsListView" prefHeight="200.0" VBox.vgrow="ALWAYS" />
+                    </children>
+                </VBox>
+            </items>
+        </SplitPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #ecf0f1; -fx-padding: 10;" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Statistiques :" textFill="#2c3e50">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label text="Total séances :" />
+                <Label fx:id="totalSeancesLabel" text="0" textFill="#3498db">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label text="Taux d'occupation :" />
+                <Label fx:id="tauxOccupationLabel" text="65%" textFill="#3498db">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

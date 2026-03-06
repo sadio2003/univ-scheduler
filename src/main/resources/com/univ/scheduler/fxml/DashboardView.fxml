@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.scheduler.controller.DashboardController">
+
+    <!-- Top Bar -->
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <!-- Barre supérieure avec titre et infos utilisateur -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+                    <children>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/logo_uidt.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="UNIV-SCHEDULER" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <Label fx:id="dateTimeLabel" text="Lundi, 01 Janvier 2024 - 14:30:00" textFill="WHITE">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+
+                        <Separator orientation="VERTICAL" />
+
+                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                            <children>
+                                <StackPane>
+                                    <children>
+                                        <Button mnemonicParsing="false" onMouseClicked="#handleNotifications" style="-fx-background-color: transparent;" text="🔔" textFill="WHITE">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Button>
+                                        <Label fx:id="notificationBadge" alignment="CENTER" style="-fx-background-color: red; -fx-text-fill: white; -fx-background-radius: 10;" text="3" textFill="WHITE" visible="false" StackPane.alignment="TOP_RIGHT">
+                                            <font>
+                                                <Font size="10.0" />
+                                            </font>
+                                            <padding>
+                                                <Insets left="4.0" right="4.0" />
+                                            </padding>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+
+                                <VBox alignment="CENTER_RIGHT">
+                                    <children>
+                                        <Label fx:id="welcomeLabel" text="Bienvenue, Admin" textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="userRoleLabel" text="Administrateur" textFill="#bdc3c7">
+                                            <font>
+                                                <Font size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                                <Button mnemonicParsing="false" onMouseClicked="#handleProfile" style="-fx-background-color: transparent;" text="👤" textFill="WHITE">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+
+                <!-- Menu de navigation -->
+                <HBox fx:id="menuHBox" alignment="CENTER_LEFT" style="-fx-background-color: #34495e; -fx-padding: 5 15 5 15;" spacing="5.0">
+                    <children>
+                        <Button fx:id="btnSalles" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🏢 Gestion des salles">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnBatiments" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🏛️ Gestion des bâtiments">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnCours" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📚 Gestion des cours">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnEmploiTemps" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📅 Emploi du temps">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnRecherche" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🔍 Recherche de salles">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnStatistiques" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📊 Statistiques">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <Button fx:id="btnDeconnexion" mnemonicParsing="false" style="-fx-background-color: #e74c3c; -fx-background-radius: 5;" text="🚪 Déconnexion" textFill="WHITE">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="10.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+
+    <!-- Centre - Contenu dynamique -->
+    <center>
+        <StackPane style="-fx-background-color: #f5f5f5;">
+            <children>
+                <!-- Vue par défaut (accueil) -->
+                <VBox alignment="CENTER" spacing="20.0">
+                    <children>
+                        <Label text="Bienvenue dans UNIV-SCHEDULER" textFill="#2c3e50">
+                            <font>
+                                <Font name="System Bold" size="32.0" />
+                            </font>
+                        </Label>
+                        <Label text="Sélectionnez une option dans le menu pour commencer" textFill="#7f8c8d">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/dashboard_icon.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="30.0" style="-fx-background-color: #34495e; -fx-padding: 5;" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="© 2026 Université du Sénégal - Tous droits réservés" textFill="WHITE">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

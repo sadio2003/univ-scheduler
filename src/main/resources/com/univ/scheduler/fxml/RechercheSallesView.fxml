@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.scheduler.controller.RechercheSallesController">
+
+    <top>
+        <VBox spacing="10.0" style="-fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2);" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Recherche de salles" textFill="#2c3e50">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Separator prefWidth="200.0" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.4" orientation="VERTICAL" BorderPane.alignment="CENTER">
+            <items>
+                <!-- Panneau de recherche -->
+                <TabPane tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Recherche simple">
+                            <content>
+                                <VBox spacing="15.0" style="-fx-padding: 20;">
+                                    <children>
+                                        <GridPane hgap="15.0" vgap="15.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" />
+                                            </columnConstraints>
+
+                                            <Label text="Date :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                            <DatePicker fx:id="dateSimplePicker" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                            <Label text="Heure :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                            <ComboBox fx:id="heureSimpleCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                            <Label text="Capacité minimum :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                            <Spinner fx:id="capaciteSimpleSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                            <Label text="Type de salle :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                            <ComboBox fx:id="typeSimpleCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                        </GridPane>
+
+                                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                            <children>
+                                                <Button fx:id="btnRechercheMaintenant" mnemonicParsing="false" style="-fx-background-color: #2ecc71;" text="🔍 Rechercher maintenant" textFill="WHITE" />
+                                                <Button fx:id="btnRechercheSimple" defaultButton="true" mnemonicParsing="false" style="-fx-background-color: #3498db;" text="🔍 Rechercher" textFill="WHITE" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </Tab>
+                        <Tab text="Recherche avancée">
+                            <content>
+                                <VBox spacing="15.0" style="-fx-padding: 20;">
+                                    <children>
+                                        <GridPane hgap="15.0" vgap="15.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="120.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" />
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="120.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" />
+                                            </columnConstraints>
+
+                                            <Label text="Date début :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                            <DatePicker fx:id="dateDebutPicker" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                            <Label text="Date fin :" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                            <DatePicker fx:id="dateFinPicker" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                                            <Label text="Heure début :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                            <ComboBox fx:id="heureDebutCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                            <Label text="Heure fin :" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                            <ComboBox fx:id="heureFinCombo" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                                            <Label text="Capacité min :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                            <Spinner fx:id="capaciteMinSpinner" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                            <Label text="Capacité max :" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                            <Spinner fx:id="capaciteMaxSpinner" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+                                            <Label text="Type :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                            <ComboBox fx:id="typeAvanceCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                                            <Label text="Bâtiment :" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                            <ComboBox fx:id="batimentCombo" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                        </GridPane>
+
+                                        <Label text="Équipements requis :" textFill="#2c3e50">
+                                            <font>
+                                                <Font name="System Bold" size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <ListView fx:id="equipementsListView" prefHeight="100.0" />
+
+                                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                            <children>
+                                                <Button fx:id="btnEffacerFiltres" mnemonicParsing="false" style="-fx-background-color: #95a5a6;" text="🗑️ Effacer les filtres" textFill="WHITE" />
+                                                <Button fx:id="btnRechercheAvancee" defaultButton="true" mnemonicParsing="false" style="-fx-background-color: #3498db;" text="🔍 Rechercher" textFill="WHITE" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+
+                <!-- Résultats -->
+                <VBox spacing="10.0" style="-fx-padding: 10;">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="20.0">
+                            <children>
+                                <Label text="Résultats de la recherche" textFill="#2c3e50">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Label text="Temps :" />
+                                <Label fx:id="tempsRechercheLabel" text="0ms" textFill="#3498db" />
+                                <Label text="Résultats :" />
+                                <Label fx:id="resultatsCountLabel" text="0 salles" textFill="#3498db">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+
+                        <TableView fx:id="resultatsTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colNumero" prefWidth="100.0" text="Numéro" />
+                                <TableColumn fx:id="colCapacite" prefWidth="80.0" text="Capacité" />
+                                <TableColumn fx:id="colType" prefWidth="80.0" text="Type" />
+                                <TableColumn fx:id="colBatiment" prefWidth="150.0" text="Bâtiment" />
+                                <TableColumn fx:id="colEquipements" prefWidth="250.0" text="Équipements" />
+                                <TableColumn fx:id="colDisponibilite" prefWidth="100.0" text="Disponibilité" />
+                                <TableColumn fx:id="colReserver" prefWidth="100.0" text="Action" />
+                            </columns>
+                        </TableView>
+
+                        <!-- Détails de la salle sélectionnée -->
+                        <TitledPane animated="false" expanded="false" text="Détails de la salle">
+                            <content>
+                                <VBox fx:id="detailsSalleBox" spacing="10.0" style="-fx-padding: 10;" />
+                            </content>
+                        </TitledPane>
+                    </children>
+                </VBox>
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>
