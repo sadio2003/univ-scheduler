@@ -85,36 +85,40 @@
                 <!-- Menu de navigation -->
                 <HBox fx:id="menuHBox" alignment="CENTER_LEFT" style="-fx-background-color: #34495e; -fx-padding: 5 15 5 15;" spacing="5.0">
                     <children>
-                        <Button fx:id="btnSalles" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🏢 Gestion des salles">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="btnBatiments" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🏛️ Gestion des bâtiments">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="btnCours" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📚 Gestion des cours">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="btnEmploiTemps" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📅 Emploi du temps">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="btnRecherche" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🔍 Recherche de salles">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Button>
-                        <Button fx:id="btnStatistiques" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📊 Statistiques">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Button>
+                        <VBox fx:id="menuVBox" spacing="5.0">
+                            <children>
+                                <Button fx:id="btnSalles" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🏢 Gestion des salles">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="btnBatiments" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🏛️ Gestion des bâtiments">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="btnCours" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📚 Gestion des cours">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="btnEmploiTemps" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📅 Emploi du temps">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="btnRecherche" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🔍 Recherche de salles">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="btnStatistiques" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="📊 Statistiques">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </VBox>
 
                         <Region HBox.hgrow="ALWAYS" />
 

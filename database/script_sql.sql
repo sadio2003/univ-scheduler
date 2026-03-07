@@ -435,17 +435,7 @@ CREATE INDEX idx_reservation_date ON Reservation(date_reservation, heure_debut);
 CREATE INDEX idx_notification_user_lu ON Notification(id_utilisateur, lu);
 
 -- =====================================================
--- CRÉATION D'UN UTILISATEUR POUR L'APPLICATION
+-- MESSAGE DE CONFIRMATION
 -- =====================================================
 
--- Créer un utilisateur dédié pour l'application (optionnel)
--- CREATE USER 'app_univ'@'localhost' IDENTIFIED BY 'MotDePasse123!';
--- GRANT ALL PRIVILEGES ON univ_scheduler.* TO 'app_univ'@'localhost';
--- FLUSH PRIVILEGES;
-
--- =====================================================
--- FIN DU SCRIPT
--- =====================================================
-
--- Message de confirmation
 SELECT '✅ Base de données univ_scheduler créée avec succès !' as Message;
