@@ -1,8 +1,8 @@
 package com.univ.scheduler.db;
 
+import com.univ.scheduler.model.Salle;
 import com.univ.scheduler.model.Batiment;
 import com.univ.scheduler.model.Equipement;
-import com.univ.scheduler.model.Salle;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

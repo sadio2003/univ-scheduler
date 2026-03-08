@@ -2,7 +2,7 @@ package com.univ.scheduler.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;  // ✅ AJOUTER CET IMPORT
+import java.util.stream.Collectors;
 
 /**
  * Classe représentant une salle de cours
@@ -103,12 +103,12 @@ public class Salle {
     }
 
     /**
-     * Obtient la liste des noms des équipements - ✅ CORRIGÉ POUR JAVA 11
+     * Obtient la liste des noms des équipements
      */
     public List<String> getEquipementsNoms() {
         return equipements.stream()
                 .map(Equipement::getNom)
-                .collect(Collectors.toList());  // ✅ Remplacer toList() par collect(Collectors.toList())
+                .collect(Collectors.toList());
     }
 
     /**

@@ -104,12 +104,11 @@ public class Seance {
     }
 
     /**
-     * Convertit le jour en français - ✅ VERSION JAVA 11
+     * Convertit le jour en français
      */
     public String getJourFrancais() {
         if (jourSemaine == null) return "";
 
-        // ✅ Switch traditionnel compatible Java 11
         switch (jourSemaine) {
             case "LUNDI":
                 return "Lundi";

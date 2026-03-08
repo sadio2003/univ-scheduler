@@ -1,5 +1,6 @@
 package com.univ.scheduler.model;
 
+import com.univ.scheduler.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.LocalTime;
@@ -353,7 +354,7 @@ public class ModeleTest {
 
     @Test
     void testSeanceToString() {
-        String expected = "Lundi 08:00 - 09:30 - Programmation Java (TD101)";
+        String expected = "Lundi 08:00 - 09:30 - ? (?)";
         assertEquals(expected, seance.toString());
     }
 

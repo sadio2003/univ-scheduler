@@ -10,10 +10,10 @@ import java.sql.SQLException;
  */
 public class DBConnection {
 
-    // Paramètres de connexion - À MODIFIER selon votre configuration
+    // Paramètres de connexion
     private static final String URL = "jdbc:mysql://localhost:3306/univ_scheduler?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private static final String UTILISATEUR = "root"; // Votre utilisateur MySQL
-    private static final String MOT_DE_PASSE = "sadio";    // ✅ Votre mot de passe MySQL
+    private static final String UTILISATEUR = "root";
+    private static final String MOT_DE_PASSE = "sadio";
 
     private static Connection connection = null;
 
@@ -28,24 +28,14 @@ public class DBConnection {
     public static Connection getConnection() {
         if (connection == null) {
             try {
-                // Charger le driver MySQL (optionnel depuis JDBC 4.0)
                 Class.forName("com.mysql.cj.jdbc.Driver");
-
-                // Établir la connexion
                 connection = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
                 System.out.println("✅ Connexion à MySQL établie avec succès");
-
             } catch (ClassNotFoundException e) {
                 System.err.println("❌ Driver MySQL non trouvé !");
-                System.err.println("Vérifiez que mysql-connector-j est dans le pom.xml");
                 e.printStackTrace();
             } catch (SQLException e) {
                 System.err.println("❌ Erreur de connexion à MySQL !");
-                System.err.println("Vérifiez que :");
-                System.err.println("1. MySQL est bien lancé (XAMPP/WAMP/MySQL Server)");
-                System.err.println("2. L'URL, l'utilisateur et le mot de passe sont corrects");
-                System.err.println("3. La base de données 'univ_scheduler' existe");
-                System.err.println("4. Le port 3306 n'est pas bloqué");
                 e.printStackTrace();
             }
         }
@@ -62,6 +52,17 @@ public class DBConnection {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * Vérifie si la connexion est fermée
+     */
+    public static boolean isConnectionClosed() {
+        try {
+            return connection == null || connection.isClosed();
+        } catch (SQLException e) {
+            return true;
         }
     }
 

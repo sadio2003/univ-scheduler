@@ -22,13 +22,9 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.Timer;        // ✅ AJOUTER CET IMPORT
-import java.util.TimerTask;    // ✅ AJOUTER CET IMPORT
+import java.util.Timer;
+import java.util.TimerTask;
 
-/**
- * Contrôleur principal du tableau de bord
- * Gère la navigation entre les différentes sections
- */
 public class DashboardController implements Initializable {
 
     @FXML private BorderPane mainPane;
@@ -46,7 +42,7 @@ public class DashboardController implements Initializable {
     @FXML private Label notificationBadge;
 
     private Utilisateur currentUser;
-    private Timer timer;  // ✅ Maintenant reconnu
+    private Timer timer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,18 +52,12 @@ public class DashboardController implements Initializable {
         setupMenuHoverEffects();
     }
 
-    /**
-     * Initialise l'utilisateur connecté
-     */
     public void setUtilisateur(Utilisateur utilisateur) {
         this.currentUser = utilisateur;
         updateWelcomeMessage();
         configureMenuByRole();
     }
 
-    /**
-     * Met à jour le message de bienvenue
-     */
     private void updateWelcomeMessage() {
         String title = "";
         switch (currentUser.getRole()) {
@@ -84,14 +74,10 @@ public class DashboardController implements Initializable {
                 title = "Étudiant";
                 break;
         }
-
         welcomeLabel.setText("Bienvenue, " + currentUser.getNom());
         userRoleLabel.setText(title);
     }
 
-    /**
-     * Configure les boutons du menu
-     */
     private void setupMenuButtons() {
         btnSalles.setOnAction(e -> loadView("GestionSallesView.fxml", "Gestion des salles"));
         btnBatiments.setOnAction(e -> loadView("GestionBatimentsView.fxml", "Gestion des bâtiments"));
@@ -102,10 +88,23 @@ public class DashboardController implements Initializable {
         btnDeconnexion.setOnAction(e -> handleLogout());
     }
 
-    /**
-     * Configure les effets de survol du menu
-     */
     private void setupMenuHoverEffects() {
+        if (menuVBox == null) {
+            // Alternative si menuVBox n'existe pas
+            Button[] buttons = {btnSalles, btnBatiments, btnCours, btnEmploiTemps, btnRecherche, btnStatistiques};
+            for (Button btn : buttons) {
+                if (btn != null) {
+                    btn.setOnMouseEntered(e ->
+                            btn.setStyle("-fx-background-color: #2c3e50; -fx-text-fill: white;")
+                    );
+                    btn.setOnMouseExited(e ->
+                            btn.setStyle("-fx-background-color: transparent; -fx-text-fill: #2c3e50;")
+                    );
+                }
+            }
+            return;
+        }
+
         for (Node node : menuVBox.getChildren()) {
             if (node instanceof Button) {
                 Button btn = (Button) node;
@@ -119,9 +118,6 @@ public class DashboardController implements Initializable {
         }
     }
 
-    /**
-     * Configure le menu selon le rôle de l'utilisateur
-     */
     private void configureMenuByRole() {
         switch (currentUser.getRole()) {
             case "Admin":
@@ -148,9 +144,13 @@ public class DashboardController implements Initializable {
      */
     private void loadView(String fxmlFile, String title) {
         try {
+            // ✅ CHEMIN CORRIGÉ
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/univ/scheduler/fxml/" + fxmlFile)
             );
+
+            System.out.println("Chargement de: /com/univ/scheduler/fxml/" + fxmlFile);
+
             Parent view = loader.load();
 
             // Animation de transition
@@ -161,11 +161,12 @@ public class DashboardController implements Initializable {
             mainPane.setCenter(view);
             ft.play();
 
-            // Mettre à jour le titre si nécessaire
+            // Mettre à jour le titre
             Stage stage = (Stage) mainPane.getScene().getWindow();
             stage.setTitle("UNIV-SCHEDULER - " + title);
 
         } catch (IOException e) {
+            System.err.println("❌ Erreur chargement: " + fxmlFile);
             e.printStackTrace();
             AlertUtil.showError("Erreur",
                     "Impossible de charger la vue",
@@ -173,9 +174,6 @@ public class DashboardController implements Initializable {
         }
     }
 
-    /**
-     * Met à jour l'heure en temps réel
-     */
     private void setupDateTimeUpdate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy - HH:mm:ss");
 
@@ -190,13 +188,8 @@ public class DashboardController implements Initializable {
         }, 0, 1000);
     }
 
-    /**
-     * Configure le badge de notifications
-     */
     private void setupNotificationBadge() {
-        // Simuler des notifications (à remplacer par de vraies données)
         int notificationCount = 3;
-
         if (notificationCount > 0) {
             notificationBadge.setText(String.valueOf(notificationCount));
             notificationBadge.setVisible(true);
@@ -205,24 +198,18 @@ public class DashboardController implements Initializable {
         }
     }
 
-    /**
-     * Gère la déconnexion
-     */
     private void handleLogout() {
         boolean confirm = AlertUtil.showConfirmation("Déconnexion",
                 "Êtes-vous sûr de vouloir vous déconnecter ?");
 
         if (confirm) {
             try {
-                // Arrêter le timer
                 if (timer != null) {
                     timer.cancel();
                 }
 
-                // Vider la session
                 LoginController.SessionManager.getInstance().logout();
 
-                // Charger la vue de connexion
                 FXMLLoader loader = new FXMLLoader(
                         getClass().getResource("/com/univ/scheduler/fxml/LoginView.fxml")
                 );
@@ -259,9 +246,6 @@ public class DashboardController implements Initializable {
                         "Dernière connexion: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
     }
 
-    /**
-     * Nettoie les ressources
-     */
     public void cleanup() {
         if (timer != null) {
             timer.cancel();

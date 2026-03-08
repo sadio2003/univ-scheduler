@@ -2,8 +2,8 @@ package com.univ.scheduler.controller;
 
 import com.univ.scheduler.db.CoursDAO;
 import com.univ.scheduler.db.UtilisateurDAO;
-import com.univ.scheduler.model.Cours;
-import com.univ.scheduler.model.Utilisateur;
+import com.univ.scheduler.model.Cours;           // ✅ AJOUTÉ
+import com.univ.scheduler.model.Utilisateur;     // ✅ AJOUTÉ
 import com.univ.scheduler.util.AlertUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;  // ✅ AJOUTER CET IMPORT
+import java.util.stream.Collectors;
 
 /**
  * Contrôleur pour la gestion des cours
@@ -135,7 +135,7 @@ public class GestionCoursController implements Initializable {
     }
 
     /**
-     * Configuration des combobox - ✅ CORRIGÉ POUR JAVA 11
+     * Configuration des combobox
      */
     private void setupCombos() {
         // Classes disponibles
@@ -152,10 +152,10 @@ public class GestionCoursController implements Initializable {
         );
         cmbGroupe.setItems(groupes);
 
-        // Enseignants - ✅ Remplacer toList() par collect(Collectors.toList())
+        // Enseignants
         List<Utilisateur> enseignants = utilisateurDAO.getAll().stream()
                 .filter(u -> "Enseignant".equals(u.getRole()))
-                .collect(Collectors.toList());  // ✅ CORRECTION ICI
+                .collect(Collectors.toList());
 
         cmbEnseignant.setItems(FXCollections.observableArrayList(enseignants));
 

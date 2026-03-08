@@ -4,12 +4,11 @@ import com.univ.scheduler.db.SalleDAO;
 import com.univ.scheduler.db.SeanceDAO;
 import com.univ.scheduler.model.Salle;
 import com.univ.scheduler.model.Seance;
-import com.univ.scheduler.util.AlertUtil;  // ✅ AJOUTER CET IMPORT
-import javafx.collections.FXCollections;
+import com.univ.scheduler.util.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
-import javafx.scene.control.*;  // ✅ IMPORT TOUS LES CONTROLES
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -54,7 +53,7 @@ public class StatistiquesController implements Initializable {
     @FXML private CategoryAxis tendanceXAxis;
     @FXML private NumberAxis tendanceYAxis;
 
-    // Onglet Détails - ✅ CORRECTION: Spécifier le type générique
+    // Onglet Détails
     @FXML private TableView<Salle> topSallesTable;
     @FXML private TableView<Salle> sallesCritiquesTable;
 
@@ -301,7 +300,6 @@ public class StatistiquesController implements Initializable {
         cell.setStyle("-fx-background-color: " + color + "20; -fx-border-color: #ddd; -fx-border-width: 0.5;");
         cell.getChildren().add(tauxLabel);
 
-        // ✅ Tooltip maintenant reconnu
         Tooltip tooltip = new Tooltip("Taux d'occupation: " + String.format("%.1f%%", taux));
         Tooltip.install(cell, tooltip);
 
@@ -327,7 +325,6 @@ public class StatistiquesController implements Initializable {
 
     @FXML
     private void exporterRapportPDF() {
-        // ✅ AlertUtil maintenant reconnu
         AlertUtil.showInformation("Export PDF",
                 "Génération du rapport PDF en cours...");
     }

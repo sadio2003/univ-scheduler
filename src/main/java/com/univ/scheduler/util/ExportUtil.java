@@ -1,9 +1,8 @@
 package com.univ.scheduler.util;
 
-import com.univ.scheduler.model.Seance;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-
+import com.univ.scheduler.model.Seance;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

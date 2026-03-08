@@ -3,12 +3,11 @@ package com.univ.scheduler.controller;
 import com.univ.scheduler.db.CoursDAO;
 import com.univ.scheduler.db.SalleDAO;
 import com.univ.scheduler.db.SeanceDAO;
-import com.univ.scheduler.model.Cours;
-import com.univ.scheduler.model.Salle;
-import com.univ.scheduler.model.Seance;
+import com.univ.scheduler.model.Cours;           // ✅ AJOUTÉ
+import com.univ.scheduler.model.Salle;           // ✅ AJOUTÉ
+import com.univ.scheduler.model.Seance;          // ✅ AJOUTÉ
 import com.univ.scheduler.util.AlertUtil;
 import com.univ.scheduler.util.ConflitUtil;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;  // ✅ AJOUTER CET IMPORT
+import java.util.stream.Collectors;
 
 /**
  * Contrôleur pour la gestion des emplois du temps
@@ -248,7 +247,7 @@ public class EmploiDuTempsController implements Initializable {
     }
 
     /**
-     * Construit la vue par classe - ✅ CORRIGÉ
+     * Construit la vue par classe
      */
     private void buildVueParClasse() {
         String classe = classeCombo.getValue();
@@ -275,10 +274,10 @@ public class EmploiDuTempsController implements Initializable {
 
         emploiDuTempsGrid.getChildren().addAll(jourHeader, horaireHeader, coursHeader, salleHeader);
 
-        // Filtrer les séances pour cette classe - ✅ Remplacer toList() par collect(Collectors.toList())
+        // Filtrer les séances pour cette classe
         List<Seance> seancesClasse = seancesObservable.stream()
                 .filter(s -> classe.equals(s.getCours().getClasse()))
-                .collect(Collectors.toList());  // ✅ CORRECTION ICI
+                .collect(Collectors.toList());
 
         int row = 1;
         for (Seance seance : seancesClasse) {
@@ -336,7 +335,7 @@ public class EmploiDuTempsController implements Initializable {
     }
 
     /**
-     * Crée une cellule pour une séance - ✅ CORRIGÉ
+     * Crée une cellule pour une séance
      */
     private VBox createSeanceCell(int jourIndex, int heureIndex) {
         VBox cell = new VBox(5);
@@ -347,11 +346,11 @@ public class EmploiDuTempsController implements Initializable {
         String jour = jours[jourIndex];
         String heure = heures[heureIndex];
 
-        // Chercher les séances à ce créneau - ✅ Remplacer toList() par collect(Collectors.toList())
+        // Chercher les séances à ce créneau
         List<Seance> seancesCreneau = seancesObservable.stream()
                 .filter(s -> s.getJourSemaine().equalsIgnoreCase(jour) &&
                         s.getHeureDebut().format(DateTimeFormatter.ofPattern("HH:mm")).equals(heure))
-                .collect(Collectors.toList());  // ✅ CORRECTION ICI
+                .collect(Collectors.toList());
 
         for (Seance seance : seancesCreneau) {
             Label coursLabel = new Label(seance.getCours().getNomMatiere());

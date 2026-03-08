@@ -1,8 +1,7 @@
 package com.univ.scheduler.util;
 
-import com.univ.scheduler.model.Seance;
 import javafx.collections.ObservableList;
-
+import com.univ.scheduler.model.Seance;
 import java.util.ArrayList;
 import java.util.List;
 

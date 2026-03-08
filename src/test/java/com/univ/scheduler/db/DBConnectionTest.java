@@ -66,7 +66,6 @@ public class DBConnectionTest {
     void testSingleton() {
         Connection conn1 = DBConnection.getConnection();
         Connection conn2 = DBConnection.getConnection();
-
         assertSame(conn1, conn2, "Les deux appels devraient retourner la même instance");
     }
 
@@ -113,10 +112,8 @@ public class DBConnectionTest {
                     "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA " +
                             "WHERE SCHEMA_NAME = 'univ_scheduler'"
             );
-
             boolean exists = rs.next();
             assertTrue(exists, "La base de données 'univ_scheduler' devrait exister");
-
             if (exists) {
                 System.out.println("✅ Base de données 'univ_scheduler' trouvée");
             }
@@ -133,14 +130,12 @@ public class DBConnectionTest {
                 "Utilisateur", "Batiment", "Equipement",
                 "Salle", "Salle_Equipement", "Cours", "Seance"
         };
-
         try (Statement stmt = connection.createStatement()) {
             for (String table : tables) {
                 ResultSet rs = stmt.executeQuery(
                         "SELECT COUNT(*) as cnt FROM information_schema.tables " +
                                 "WHERE table_schema = 'univ_scheduler' AND table_name = '" + table + "'"
                 );
-
                 rs.next();
                 int count = rs.getInt("cnt");
                 assertEquals(1, count, "La table '" + table + "' devrait exister");
@@ -162,7 +157,6 @@ public class DBConnectionTest {
                     "SELECT COUNT(*) as cnt FROM information_schema.table_constraints " +
                             "WHERE constraint_schema = 'univ_scheduler' AND constraint_type = 'FOREIGN KEY'"
             );
-
             rs.next();
             int nbForeignKeys = rs.getInt("cnt");
             assertTrue(nbForeignKeys > 0, "Il devrait y avoir des clés étrangères");
@@ -182,7 +176,6 @@ public class DBConnectionTest {
             ResultSet rs = stmt.executeQuery(
                     "SELECT COUNT(*) as cnt FROM Utilisateur WHERE email = 'admin@uidt.sn'"
             );
-
             rs.next();
             int count = rs.getInt("cnt");
             assertTrue(count > 0, "L'utilisateur admin@uidt.sn devrait exister");
@@ -214,14 +207,12 @@ public class DBConnectionTest {
     @DisplayName("Test de performance - requête simple")
     void testPerformance() {
         long startTime = System.currentTimeMillis();
-
         try (Statement stmt = connection.createStatement()) {
             for (int i = 0; i < 10; i++) {
                 stmt.executeQuery("SELECT 1");
             }
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
-
             assertTrue(duration < 5000, "Les 10 requêtes devraient prendre moins de 5 secondes");
             System.out.println("✅ Performance: " + duration + "ms pour 10 requêtes");
         } catch (SQLException e) {
@@ -237,31 +228,22 @@ public class DBConnectionTest {
     void testTransaction() {
         try {
             connection.setAutoCommit(false);
-
             try (Statement stmt = connection.createStatement()) {
-                // Insérer un utilisateur temporaire
                 stmt.executeUpdate(
                         "INSERT INTO Utilisateur (nom, email, mot_de_passe, role) " +
                                 "VALUES ('Test User', 'test@test.com', 'password', 'Etudiant')"
                 );
-
-                // Vérifier qu'il a été inséré
                 ResultSet rs = stmt.executeQuery(
                         "SELECT COUNT(*) as cnt FROM Utilisateur WHERE email = 'test@test.com'"
                 );
                 rs.next();
                 assertEquals(1, rs.getInt("cnt"), "L'utilisateur devrait être inséré");
-
-                // Rollback
                 connection.rollback();
-
-                // Vérifier qu'il n'est plus là
                 rs = stmt.executeQuery(
                         "SELECT COUNT(*) as cnt FROM Utilisateur WHERE email = 'test@test.com'"
                 );
                 rs.next();
                 assertEquals(0, rs.getInt("cnt"), "L'utilisateur devrait avoir été rollback");
-
                 System.out.println("✅ Transaction rollback réussie");
             }
         } catch (SQLException e) {
@@ -279,21 +261,20 @@ public class DBConnectionTest {
 
     @Test
     @Order(13)
-    @DisplayName("Test de fermeture de connexion")
+    @DisplayName("Test de fermeture et réouverture de connexion")
     void testFermeture() {
+        // Fermer la connexion
         DBConnection.closeConnection();
 
+        // Vérifier qu'on peut obtenir une nouvelle connexion
+        Connection newConn = DBConnection.getConnection();
+        assertNotNull(newConn, "Une nouvelle connexion devrait être créée");
+
         try {
-            // Vérifier que la connexion est fermée
-            assertNull(DBConnection.getConnection(), "La connexion devrait être réinitialisée");
-
-            // Rouvrir pour les tests suivants
-            connection = DBConnection.getConnection();
-            assertNotNull(connection);
-
-            System.out.println("✅ Fermeture de connexion testée avec succès");
-        } catch (Exception e) {
-            fail("Erreur lors du test de fermeture: " + e.getMessage());
+            assertFalse(newConn.isClosed(), "La nouvelle connexion devrait être ouverte");
+            System.out.println("✅ Fermeture et réouverture de connexion réussies");
+        } catch (SQLException e) {
+            fail("Erreur: " + e.getMessage());
         }
     }
 }

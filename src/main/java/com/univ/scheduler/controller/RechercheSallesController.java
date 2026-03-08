@@ -1,11 +1,11 @@
 package com.univ.scheduler.controller;
 
-import com.univ.scheduler.db.BatimentDAO;
-import com.univ.scheduler.db.EquipementDAO;
-import com.univ.scheduler.db.SalleDAO;
+import com.univ.scheduler.model.Salle;
 import com.univ.scheduler.model.Batiment;
 import com.univ.scheduler.model.Equipement;
-import com.univ.scheduler.model.Salle;
+import com.univ.scheduler.db.EquipementDAO;
+import com.univ.scheduler.db.BatimentDAO;
+import com.univ.scheduler.db.SalleDAO;
 import com.univ.scheduler.util.AlertUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -21,7 +21,6 @@ import javafx.geometry.Insets;  // ✅ AJOUTER CET IMPORT
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;  // ✅ AJOUTER CET IMPORT

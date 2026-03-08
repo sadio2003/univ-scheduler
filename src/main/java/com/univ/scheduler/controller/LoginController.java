@@ -1,7 +1,7 @@
 package com.univ.scheduler.controller;
 
+import com.univ.scheduler.model.Utilisateur;  // ✅ AJOUTER CET IMPORT
 import com.univ.scheduler.db.UtilisateurDAO;
-import com.univ.scheduler.model.Utilisateur;
 import com.univ.scheduler.util.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;

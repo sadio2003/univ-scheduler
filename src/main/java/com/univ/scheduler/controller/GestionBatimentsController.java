@@ -1,10 +1,9 @@
 package com.univ.scheduler.controller;
 
 import com.univ.scheduler.db.BatimentDAO;
-import com.univ.scheduler.model.Batiment;
 import com.univ.scheduler.util.AlertUtil;
+import com.univ.scheduler.model.Batiment;  // ✅ AJOUTER CET IMPORT
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

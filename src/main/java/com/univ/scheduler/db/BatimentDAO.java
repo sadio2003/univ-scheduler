@@ -1,6 +1,6 @@
 package com.univ.scheduler.db;
 
-import com.univ.scheduler.model.Batiment;
+import com.univ.scheduler.model.Batiment;  // ← IMPORT AJOUTÉ
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
