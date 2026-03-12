@@ -23,7 +23,7 @@
                 <children>
                     <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image url="@../images/logo_uidt.png" />
+                            <Image url="@../images/logo_UIDT.png" />
                         </image>
                     </ImageView>
                     <Label text="UNIV-SCHEDULER" textFill="WHITE">
@@ -47,13 +47,15 @@
             <!-- Partie droite - Formulaire de connexion -->
             <VBox alignment="CENTER" spacing="20.0" GridPane.columnIndex="1">
                 <children>
-                    <Label text="Connexion" textFill="#2c3e50">
+                    <!-- ✅ "Connexion" en bleu -->
+                    <Label text="Connexion" textFill="#3498db">
                         <font>
                             <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
 
-                    <Label text="Veuillez vous connecter pour accéder à l'application" textFill="#7f8c8d">
+                    <!-- ✅ "Veuillez vous connecter..." en bleu -->
+                    <Label text="Veuillez vous connecter pour accéder à l'application" textFill="#3498db" wrapText="true">
                         <font>
                             <Font size="14.0" />
                         </font>
@@ -109,7 +111,8 @@
                         </children>
                     </HBox>
 
-                    <Label text="© 2026 Université du Sénégal - Tous droits réservés" textFill="#95a5a6">
+                    <!-- ✅ "© 2026 Université du Sénégal..." en bleu -->
+                    <Label text="© 2026 Université du Sénégal - Tous droits réservés" textFill="#3498db">
                         <font>
                             <Font size="11.0" />
                         </font>

@@ -10,9 +10,9 @@
 
 <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: linear-gradient(to bottom, #3498db, #2c3e50); -fx-padding: 30;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="rounded-image">
             <image>
-                <Image url="@../images/logo_uidt.png" />
+                <Image url="@../images/logo_UIDT.png" />
             </image>
         </ImageView>
 

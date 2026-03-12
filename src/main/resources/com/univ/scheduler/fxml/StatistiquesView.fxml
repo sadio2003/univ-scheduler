@@ -6,74 +6,88 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <BorderPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.univ.scheduler.controller.StatistiquesController">
 
+    <!-- Top Bar avec profil utilisateur -->
     <top>
-        <VBox spacing="10.0" style="-fx-background-color: white; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2);" BorderPane.alignment="CENTER">
-            <children>
-                <HBox alignment="CENTER_LEFT" spacing="10.0">
-                    <children>
-                        <Label text="Statistiques et rapports" textFill="#2c3e50">
-                            <font>
-                                <Font name="System Bold" size="24.0" />
-                            </font>
-                        </Label>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#exporterRapportPDF" style="-fx-background-color: #e74c3c;" text="📥 Export PDF" textFill="WHITE" />
-                        <Button mnemonicParsing="false" onAction="#exporterRapportExcel" style="-fx-background-color: #27ae60;" text="📊 Export Excel" textFill="WHITE" />
-                        <Button mnemonicParsing="false" onAction="#imprimerRapport" style="-fx-background-color: #3498db;" text="🖨️ Imprimer" textFill="WHITE" />
-                        <Button mnemonicParsing="false" onAction="#actualiserDonnees" style="-fx-background-color: #f39c12;" text="🔄 Actualiser" textFill="WHITE" />
-                    </children>
-                </HBox>
-                <Separator prefWidth="200.0" />
-                <Label fx:id="periodeLabel" text="Période du 01/03/2024 au 31/03/2024" textFill="#7f8c8d" />
-            </children>
+        <VBox spacing="0">
+            <!-- Profil utilisateur -->
+            <HBox styleClass="profile-section" alignment="CENTER_LEFT" spacing="15.0">
+                <children>
+                    <ImageView fx:id="profileImage" fitHeight="50.0" fitWidth="50.0" styleClass="profile-image">
+                        <image>
+                            <Image url="@../images/utilisateur.png" />
+                        </image>
+                    </ImageView>
+                    <VBox spacing="5.0">
+                        <children>
+                            <Label fx:id="userNameLabel" text="Admin UIDT" styleClass="profile-name" />
+                            <Label fx:id="userRoleBadge" text="Administrateur" styleClass="profile-role-admin" />
+                        </children>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button text="Déconnexion" styleClass="button-danger" fx:id="logoutButton" />
+                </children>
+                <padding>
+                    <Insets top="15.0" right="20.0" bottom="15.0" left="20.0" />
+                </padding>
+            </HBox>
+
+            <!-- En-tête avec actions -->
+            <HBox styleClass="filter-section" alignment="CENTER_LEFT" spacing="15.0">
+                <children>
+                    <Label text="Statistiques et rapports" styleClass="card-header" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button onAction="#exporterRapportPDF" text="📥 Export PDF" styleClass="button-danger" />
+                    <Button onAction="#exporterRapportExcel" text="📊 Export Excel" styleClass="button-success" />
+                    <Button onAction="#imprimerRapport" text="🖨️ Imprimer" styleClass="button-primary" />
+                    <Button onAction="#actualiserDonnees" text="🔄 Actualiser" styleClass="button-warning" />
+                </children>
+                <padding>
+                    <Insets top="15.0" right="20.0" bottom="15.0" left="20.0" />
+                </padding>
+            </HBox>
+
+            <!-- Période -->
+            <HBox style="-fx-background-color: #f8f9fa; -fx-padding: 10 20;">
+                <Label fx:id="periodeLabel" text="Période du 01/03/2026 au 31/03/2026" styleClass="filter-title" />
+            </HBox>
         </VBox>
     </top>
 
     <center>
-        <TabPane fx:id="statistiquesTabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-            <tabs>
-                <Tab text="Vue d'ensemble">
-                    <content>
-                        <ScrollPane fitToWidth="true">
+        <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;">
+            <content>
+                <TabPane fx:id="statistiquesTabPane" tabClosingPolicy="UNAVAILABLE" styleClass="card">
+                    <tabs>
+                        <Tab text="Vue d'ensemble">
                             <content>
                                 <VBox spacing="20.0" style="-fx-padding: 20;">
                                     <children>
                                         <!-- Indicateurs clés -->
-                                        <HBox spacing="20.0" style="-fx-padding: 15; -fx-background-color: #f8f9fa; -fx-background-radius: 10;">
+                                        <HBox spacing="20.0" alignment="CENTER" >
                                             <children>
-                                                <VBox alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
-                                                    <Label text="Salles" textFill="#7f8c8d" />
-                                                    <Label fx:id="totalSallesLabel" text="0" textFill="#2c3e50">
-                                                        <font>
-                                                            <Font name="System Bold" size="24.0" />
-                                                        </font>
-                                                    </Label>
+                                                <VBox styleClass="stat-card" alignment="CENTER" spacing="5.0">
+                                                    <Label text="🏢" styleClass="stat-icon" />
+                                                    <Label fx:id="totalSallesLabel" text="24" styleClass="stat-value" />
+                                                    <Label text="Salles" styleClass="stat-label" />
                                                 </VBox>
-                                                <VBox alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
-                                                    <Label text="Cours" textFill="#7f8c8d" />
-                                                    <Label fx:id="totalCoursLabel" text="0" textFill="#2c3e50">
-                                                        <font>
-                                                            <Font name="System Bold" size="24.0" />
-                                                        </font>
-                                                    </Label>
+                                                <VBox styleClass="stat-card" alignment="CENTER" spacing="5.0">
+                                                    <Label text="📚" styleClass="stat-icon" />
+                                                    <Label fx:id="totalCoursLabel" text="15" styleClass="stat-value" />
+                                                    <Label text="Cours" styleClass="stat-label" />
                                                 </VBox>
-                                                <VBox alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
-                                                    <Label text="Séances" textFill="#7f8c8d" />
-                                                    <Label fx:id="totalSeancesLabel" text="0" textFill="#2c3e50">
-                                                        <font>
-                                                            <Font name="System Bold" size="24.0" />
-                                                        </font>
-                                                    </Label>
+                                                <VBox styleClass="stat-card" alignment="CENTER" spacing="5.0">
+                                                    <Label text="📅" styleClass="stat-icon" />
+                                                    <Label fx:id="totalSeancesLabel" text="45" styleClass="stat-value" />
+                                                    <Label text="Séances" styleClass="stat-label" />
                                                 </VBox>
-                                                <VBox alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
-                                                    <Label text="Enseignants" textFill="#7f8c8d" />
-                                                    <Label fx:id="totalEnseignantsLabel" text="0" textFill="#2c3e50">
-                                                        <font>
-                                                            <Font name="System Bold" size="24.0" />
-                                                        </font>
-                                                    </Label>
+                                                <VBox styleClass="stat-card" alignment="CENTER" spacing="5.0">
+                                                    <Label text="👨‍🏫" styleClass="stat-icon" />
+                                                    <Label fx:id="totalEnseignantsLabel" text="12" styleClass="stat-value" />
+                                                    <Label text="Enseignants" styleClass="stat-label" />
                                                 </VBox>
                                             </children>
                                         </HBox>
@@ -86,47 +100,27 @@
                                             </columnConstraints>
 
                                             <!-- Taux d'occupation -->
-                                            <VBox spacing="10.0" style="-fx-padding: 15; -fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                            <VBox styleClass="card" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                 <children>
-                                                    <Label text="Taux d'occupation global" textFill="#2c3e50">
-                                                        <font>
-                                                            <Font name="System Bold" size="14.0" />
-                                                        </font>
-                                                    </Label>
+                                                    <Label text="Taux d'occupation global" styleClass="card-header" />
                                                     <ProgressBar fx:id="occupationGlobaleBar" prefWidth="200.0" progress="0.65" />
-                                                    <Label fx:id="occupationGlobaleLabel" text="65%" textFill="#3498db">
-                                                        <font>
-                                                            <Font name="System Bold" size="18.0" />
-                                                        </font>
-                                                    </Label>
+                                                    <Label fx:id="occupationGlobaleLabel" text="65%" styleClass="stat-value" />
                                                 </children>
                                             </VBox>
 
                                             <!-- Utilisation des salles -->
-                                            <VBox spacing="10.0" style="-fx-padding: 15; -fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                            <VBox styleClass="card" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                                 <children>
-                                                    <Label text="Utilisation des salles" textFill="#2c3e50">
-                                                        <font>
-                                                            <Font name="System Bold" size="14.0" />
-                                                        </font>
-                                                    </Label>
+                                                    <Label text="Utilisation des salles" styleClass="card-header" />
                                                     <ProgressBar fx:id="utilisationSallesBar" prefWidth="200.0" progress="0.42" />
-                                                    <Label fx:id="utilisationSallesLabel" text="42%" textFill="#3498db">
-                                                        <font>
-                                                            <Font name="System Bold" size="18.0" />
-                                                        </font>
-                                                    </Label>
+                                                    <Label fx:id="utilisationSallesLabel" text="42%" styleClass="stat-value" />
                                                 </children>
                                             </VBox>
 
                                             <!-- Graphique en barres -->
-                                            <VBox spacing="10.0" style="-fx-padding: 15; -fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                            <VBox styleClass="card" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                 <children>
-                                                    <Label text="Occupation par jour" textFill="#2c3e50">
-                                                        <font>
-                                                            <Font name="System Bold" size="14.0" />
-                                                        </font>
-                                                    </Label>
+                                                    <Label text="Occupation par jour" styleClass="card-header" />
                                                     <BarChart fx:id="occupationChart" prefHeight="300.0">
                                                         <xAxis>
                                                             <CategoryAxis fx:id="occupationXAxis" side="BOTTOM" />
@@ -141,80 +135,64 @@
                                     </children>
                                 </VBox>
                             </content>
-                        </ScrollPane>
-                    </content>
-                </Tab>
+                        </Tab>
 
-                <Tab text="Répartition des salles">
-                    <content>
-                        <HBox spacing="20.0" style="-fx-padding: 20;">
-                            <children>
-                                <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                        <Tab text="Répartition des salles">
+                            <content>
+                                <HBox spacing="20.0" style="-fx-padding: 20">
                                     <children>
-                                        <Label text="Types de salles" textFill="#2c3e50">
-                                            <font>
-                                                <Font name="System Bold" size="14.0" />
-                                            </font>
-                                        </Label>
-                                        <PieChart fx:id="typeSallesChart" prefHeight="400.0" />
+                                        <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="Types de salles" styleClass="card-header" />
+                                                <PieChart fx:id="typeSallesChart" prefHeight="400.0" />
+                                            </children>
+                                        </VBox>
+                                        <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label text="Équipements" styleClass="card-header" />
+                                                <PieChart fx:id="equipementsChart" prefHeight="400.0" />
+                                            </children>
+                                        </VBox>
                                     </children>
-                                </VBox>
-                                <VBox spacing="20.0" HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Label text="Équipements" textFill="#2c3e50">
-                                            <font>
-                                                <Font name="System Bold" size="14.0" />
-                                            </font>
-                                        </Label>
-                                        <PieChart fx:id="equipementsChart" prefHeight="400.0" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </content>
-                </Tab>
+                                </HBox>
+                            </content>
+                        </Tab>
 
-                <Tab text="Tendances">
-                    <content>
-                        <VBox spacing="20.0" style="-fx-padding: 20;">
-                            <children>
-                                <Label text="Évolution du taux d'occupation" textFill="#2c3e50">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <LineChart fx:id="tendanceChart" prefHeight="400.0">
-                                    <xAxis>
-                                        <CategoryAxis fx:id="tendanceXAxis" side="BOTTOM" />
-                                    </xAxis>
-                                    <yAxis>
-                                        <NumberAxis fx:id="tendanceYAxis" side="LEFT" />
-                                    </yAxis>
-                                </LineChart>
-                            </children>
-                        </VBox>
-                    </content>
-                </Tab>
-
-                <Tab text="Heat map">
-                    <content>
-                        <ScrollPane fitToWidth="true">
+                        <Tab text="Tendances">
                             <content>
                                 <VBox spacing="20.0" style="-fx-padding: 20;">
                                     <children>
-                                        <Label text="Carte de chaleur d'occupation" textFill="#2c3e50">
-                                            <font>
-                                                <Font name="System Bold" size="14.0" />
-                                            </font>
-                                        </Label>
-                                        <GridPane fx:id="heatMapGrid" gridLinesVisible="true" style="-fx-background-color: white;" />
+                                        <Label text="Évolution du taux d'occupation" styleClass="card-header" />
+                                        <LineChart fx:id="tendanceChart" prefHeight="400.0">
+                                            <xAxis>
+                                                <CategoryAxis fx:id="tendanceXAxis" side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis fx:id="tendanceYAxis" side="LEFT" />
+                                            </yAxis>
+                                        </LineChart>
                                     </children>
                                 </VBox>
                             </content>
-                        </ScrollPane>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
+                        </Tab>
+
+                        <Tab text="Heat map">
+                            <content>
+                                <VBox spacing="20.0" style="-fx-padding: 20;">
+                                    <children>
+                                        <Label text="Carte de chaleur d'occupation" styleClass="card-header" />
+                                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                                            <content>
+                                                <GridPane fx:id="heatMapGrid" styleClass="schedule-grid" />
+                                            </content>
+                                        </ScrollPane>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </content>
+        </ScrollPane>
     </center>
 </BorderPane>
